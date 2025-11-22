@@ -64,3 +64,14 @@ let messages = [];
             });
           });
         });
+
+        // Welcome Speech
+document.addEventListener("DOMContentLoaded", () => {
+    let userName = prompt("Siapa nama kamu?");
+
+    if (userName === null || userName.trim() === "") {
+        userName = "Guest";
+    }
+
+    document.getElementById("welcome-message").textContent = `Welcome, ${userName}!`;
+});
