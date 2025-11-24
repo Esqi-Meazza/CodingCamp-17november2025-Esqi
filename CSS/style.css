@@ -70,6 +70,13 @@ header {
     padding: 0 10px;
 }
 
+.header-list-icon li{
+    transition: all 0.3s ease;
+}
+
+.header-list-icon li:hover {
+    transform: translateY(-3px);
+}
 .header-list a:hover,
 .header-list a.active {
     color: #00bbff;
@@ -361,21 +368,47 @@ header {
 }
 
 .projects-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 48px;
     padding: 30px;
 }
 
 .project-card {
+    flex: 0 0 calc(33.33% - 32px);
     background: linear-gradient(135deg, #f5f5f5, #ddd);
     color: #111;
+    border: 1px solid var(--glass-border);
     border-radius: 12px;
+    position: relative;
     overflow: hidden;
     text-align: center;
-    transition: all 0.4s ease;
     cursor: pointer;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+    background: linear-gradient(135deg, #fff, #ccc);
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.project-card:hover::before {
+    left: 100%;
 }
 
 .project-card img {
@@ -386,7 +419,7 @@ header {
 }
 
 .project-card h3 {
-    margin: 15px 0 5px;
+    margin: 15px 15px;
     font-size: 1.2rem;
     color: #1e90ff;
     transition: color 0.3s ease;
@@ -420,11 +453,6 @@ header {
     box-shadow: 0 8px 12px rgba(0,0,0,0.3);
 }
 
-.project-card:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.35);
-    background: linear-gradient(135deg, #fff, #ccc);
-}
 
 .contact {
     margin: 160px 200px;
@@ -507,7 +535,7 @@ header {
 }
 
 .contact-form .form-group {
-    margin-bottom: 20px;
+    margin: 20px 0 20px;
 }
 
 .contact-form input,
@@ -546,131 +574,6 @@ header {
     box-shadow: 0 10px 25px rgba(0,0,0,0.35);
     background: linear-gradient(135deg, #00bbff, #1e90ff);
 }
-
-/* Messages Display */
-        .messages-display {
-            background: #fff;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            max-height: 600px;
-            overflow-y: auto;
-        }
-
-        .messages-display h4 {
-            font-size: 1.3rem;
-            color: #1e1e24;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .messages-display h4 i {
-            color: #1e90ff;
-        }
-
-        .message-card {
-            background: linear-gradient(135deg, #f8f9fa, #fff);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 15px;
-            border-left: 4px solid #00bbff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            animation: slideIn 0.4s ease;
-            transition: all 0.3s ease;
-        }
-
-        .message-card:hover {
-            transform: translateX(8px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border-left-color: #1e90ff;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .message-name {
-            font-weight: 700;
-            color: #1e90ff;
-            font-size: 1.1rem;
-        }
-
-        .message-time {
-            font-size: 0.8rem;
-            color: #999;
-            background: #f0f0f0;
-            padding: 4px 10px;
-            border-radius: 20px;
-        }
-
-        .message-subject {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-            font-size: 0.95rem;
-        }
-
-        .message-email {
-            font-size: 0.85rem;
-            color: #777;
-            margin-bottom: 10px;
-        }
-
-        .message-text {
-            color: #555;
-            line-height: 1.6;
-            font-size: 0.95rem;
-            padding-top: 10px;
-            border-top: 1px dashed #e0e0e0;
-        }
-
-        .no-messages {
-            text-align: center;
-            color: #999;
-            padding: 40px 20px;
-        }
-
-        .no-messages i {
-            font-size: 3rem;
-            color: #ddd;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .message-count {
-            background: linear-gradient(135deg, #1e90ff, #00bfff);
-            color: #fff;
-            padding: 3px 10px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-left: auto;
-        }
-
-        /* Scrollbar */
-        .messages-display::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .messages-display::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .messages-display::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #1e90ff, #00bfff);
-            border-radius: 10px;
-        }
-
 
 @media (max-width: 1024px) {
     .projects-container {
@@ -916,3 +819,127 @@ header {
         bottom: 5%;
     }
 }
+
+/* Messages Display */
+
+/* .messages-display {
+            background: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .messages-display h4 {
+            font-size: 1.3rem;
+            color: #1e1e24;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .messages-display h4 i {
+            color: #1e90ff;
+        }
+
+        .message-card {
+            background: linear-gradient(135deg, #f8f9fa, #fff);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #00bbff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            animation: slideIn 0.4s ease;
+            transition: all 0.3s ease;
+        }
+
+        .message-card:hover {
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border-left-color: #1e90ff;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .message-name {
+            font-weight: 700;
+            color: #1e90ff;
+            font-size: 1.1rem;
+        }
+
+        .message-time {
+            font-size: 0.8rem;
+            color: #999;
+            background: #f0f0f0;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .message-subject {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .message-email {
+            font-size: 0.85rem;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .message-text {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            padding-top: 10px;
+            border-top: 1px dashed #e0e0e0;
+        }
+
+        .no-messages {
+            text-align: center;
+            color: #999;
+            padding: 40px 20px;
+        }
+
+        .no-messages i {
+            font-size: 3rem;
+            color: #ddd;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .message-count {
+            background: linear-gradient(135deg, #1e90ff, #00bfff);
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-left: auto;
+        }
+
+        .messages-display::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .messages-display::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .messages-display::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #1e90ff, #00bfff);
+            border-radius: 10px;
+        } */
